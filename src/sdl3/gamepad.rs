@@ -1138,6 +1138,8 @@ impl Gamepad {
     }
 }
 
+impl_raw_accessors!((Gamepad, *mut sys::gamepad::SDL_Gamepad));
+
 #[cfg(feature = "hidapi")]
 impl Gamepad {
     #[doc(alias = "SDL_GamepadHasSensor")]
