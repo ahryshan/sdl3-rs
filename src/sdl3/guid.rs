@@ -1,6 +1,7 @@
 use libc::c_char;
 use std::ffi::{CStr, CString, NulError};
 use std::fmt::{Display, Error, Formatter};
+use std::hash::Hash;
 use sys::guid::SDL_GUID;
 
 /// Wrapper around a `SDL_GUID`, a globally unique identifier
@@ -17,6 +18,12 @@ impl PartialEq for Guid {
 }
 
 impl Eq for Guid {}
+
+impl Hash for Guid {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        self.raw.hash(state);
+    }
+}
 
 impl Guid {
     /// Create a GUID from a string representation.
